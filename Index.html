@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "/Users/andrecastro/Documents/Projects/Marilyns Creations - Inventory Frontend/Styling.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@200&display=swap" rel="stylesheet">
+    <title>Marilyn's Creations - Inventory</title>
+</head>
+<body>
+
+<section class = "title"> 
+    <div class ="titlepage">
+        <h1>Marilyn's Creations - Inventory</h1>
+    </div>
+</section>
+
+<section class = "dropDown">
+    <div class = "item item-1">
+        <h1>Item</h1>
+        <input id="inputField" type="number" oninput="calculate()">
+    </div>
+    <div class = "item item-2">
+        <h1>Quantity</h1>
+        <input id="inputFieldSecond" type="number" oninput="calculate()">
+    </div>
+    <div class = "cost">
+        <input id = "theCost"></input>
+    </div>
+</section>
+
+<div class = "buttonContainer">
+    <button id="addToCalc">Add to Calculation</button>
+</div>
+
+
+<section class = "TheCalc">
+    <div class = "product-container">
+        <div class="product" id="toCalcContainer"></div>
+    </div>
+</section>
+
+
+<section class = "totalCost-container">
+    <button id="totalCostCalc">Calculate</button>
+</section>
+<div class = "totalOutput-container">
+    <input id = "output"></input>
+</div>
+<script src = "/Users/andrecastro/Documents/Projects/Marilyns Creations - Inventory Frontend/Inventory.js"></script>
+
+</body>
+</html>
