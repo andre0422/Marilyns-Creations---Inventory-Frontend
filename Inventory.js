@@ -1,40 +1,56 @@
 let addToCalc = document.getElementById('addToCalc');
 let toCalcContainer = document.getElementById('toCalcContainer');
-let inputField = document.getElementById('inputField').value;
-let quantity = document.getElementById('inputFieldSecond').value;
+let deleteContainer = document.getElementById('deleteContainer')
+let inputField = document.getElementById('inputField-1');
+let quantity = document.getElementById('inputFieldSecond');
 let totalCostCalc = document.getElementById('totalCostCalc');
 let output = document.getElementById('cost');
+let theCost = document.getElementById('theCost');
+let productCost = [];
+let totalCost = document.getElementById('output');
 
+//Calculates cost for x quantity of product y
 function calculate() {
-    var inputField = document.getElementById('inputField').value;
-    var quantity = document.getElementById('inputFieldSecond').value;
-    var cost = document.getElementById('theCost');
-    var theCost = inputField * quantity;
-    cost.value = theCost;
-
+    theCost.value = inputField.value * quantity.value;
 }
 
-addToCalc.addEventListener('click', () => { 
-    var prod = document.createElement('p');
-    prod.innerText = theCost.value;
-    toCalcContainer.appendChild(prod);
-    inputField.value = 0;
-    quantity.value = 0;
-    cost.value = 0;
-    prod.addEventListener('click', () => {
-        prod.style.textDecoration = "line-through"
-    });
-    prod.addEventListener('dblclick', () => {
-        toCalcContainer.removeChild(prod)
-    });
-})
+//Appends the calculated cost to the list of materials that will be included in final cost calculation
+function addProduct() {
+    
+    productCost.push(theCost.valueAsNumber);
+    var product = document.createElement('p');
+    var deleteProduct = document.createElement('button')
+    deleteProduct.classList.add('deleteButton');
+    product.classList.add('value')
+    product.innerText = theCost.value;
+    toCalcContainer.appendChild(product);
+    deleteContainer.appendChild(deleteProduct);
 
+
+    console.log(productCost);
+    
+    inputField.value = "";
+    quantity.value = "";
+    theCost.value = 1;
+    
+    /*var product = document.createElement('p'); 
+    
+    product.innerText = theCost.value;
+    toCalcContainer.appendChild(product); */
+
+    deleteProduct.addEventListener('click', () => {
+        toCalcContainer.removeChild(product)
+        deleteContainer.removeChild(deleteProduct)
+    });
+    /*product.addEventListener('dblclick', () => {
+        toCalcContainer.removeChild(product)
+    }); */
+}
 
 totalCostCalc.addEventListener('click', () => {
-    var items = document.getElementsByTagName("p").value
-    let output = document.getElementById('cost');
-    var totalCost = items++;
-    output.value = totalCost;
-
+    
+    const yourFinalPrice = (accumulator, currentValue) => accumulator + currentValue;
+    totalCost.value = (productCost.reduce(yourFinalPrice));
 })
-//Need to find a way to create an array to add all of the <p> values and display them//
+
+

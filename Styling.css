@@ -7,8 +7,8 @@
 body {
     line-height: 1.3;
     background-attachment: fixed;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     font-family: 'Rokkitt', serif;
     height: 100vh;
 }
@@ -17,34 +17,40 @@ body {
     font-size: 3em;
 }
 .dropDown {
-    
     margin-top: 20px;
+    margin: 3em;
 }
 .item {
-    margin: 3em;
+    margin: 0em;
+    margin-top: 3em;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    padding-top: 15px;
 }
-#inputField {
-    margin-left: 5em;
-    background-color: #111010;
-    border: none;
-    color: white;
+.item-1{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
 }
+
+#inputField-1, #inputField-2, #inputField-3 {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #9A9A9A;
+}
+
 #inputFieldSecond{
-    margin-left: 2.5em;
-    background-color: #111010;
-    border: none;
-    color: white;
+    margin-top: 15px;
+    padding: 5px;
+    border: 1px solid #9A9A9A;
+    color: black;
 }
 .cost {
-
     margin: 3em;
     display: flex;
     justify-content: center;
 }
 #theCost {
-    background-color: #111010;
     border: none;
     color: white; 
     padding: 15px;
@@ -56,8 +62,8 @@ body {
     margin-top: 20px;
 }
 #addToCalc {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border-color: white;
     padding: 10px 25px;
     font-size: 12px;
@@ -72,20 +78,64 @@ body {
     margin: 3em;
     display: flex;
     flex-direction: column;
+
+    margin: 3em;
+    padding: 10px;
+
 }
-.TheCalc > .product-container > .product > p {
+/*.TheCalc > .product-container > .product > p {
     padding: 10px;
     margin: 2em;
-}
+}*/
 .totalCost-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 #totalCostCalc {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border-color: white;
     padding: 10px 25px;
     font-size: 12px;
+} 
+.totalOutput-container {
+    padding-top: 3em;
+    display: flex;
+    justify-content: center;
+}
+.deleteButton {
+    border: none;
+    background-color: white;
+    font-size: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: 18px;
+    color: black;
+}
+.deleteButton::after {
+    content: "x";
+}
+.product-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+#deleteContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.value {
+    font-size: 30px;
+}
+
+
+#output {
+    padding: 10px;
+    margin-top: 2em;
+    font-size: 30px;
+    text-align: center;
 }
