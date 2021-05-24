@@ -11,6 +11,7 @@ let theCost = document.getElementById('theCost');
 let productCost = [];
 let totalCost = document.getElementById('output');
 let jewelryDisplay = document.getElementById('search_results');
+let reduction = 0;
 
 //Calculates cost for x quantity of product y
 function calculate(event) {
@@ -23,7 +24,8 @@ function addProduct() {
     
     productCost.push(theCost.valueAsNumber);
     var product = document.createElement('p');
-    var deleteProduct = document.createElement('button')
+    var deleteProduct = document.createElement('button');
+    deleteProduct.value = theCost.value;
     deleteProduct.classList.add('deleteButton');
     product.classList.add('value')
     product.innerText = theCost.value;
@@ -44,9 +46,14 @@ function addProduct() {
     product.innerText = theCost.value;
     toCalcContainer.appendChild(product); */
 
-    deleteProduct.addEventListener('click', () => {
+    deleteProduct.addEventListener('click', (event) => {
         toCalcContainer.removeChild(product)
         deleteContainer.removeChild(deleteProduct)
+        reduction += Number(event.target.value);
+
+
+        console.log(reduction);
+        
     });
     /*product.addEventListener('dblclick', () => {
         toCalcContainer.removeChild(product)
@@ -56,7 +63,7 @@ function addProduct() {
 totalCostCalc.addEventListener('click', () => {
     
     const yourFinalPrice = (accumulator, currentValue) => accumulator + currentValue;
-    totalCost.value = (productCost.reduce(yourFinalPrice));
+    totalCost.value = (productCost.reduce(yourFinalPrice)) - reduction;
 })
 
 //Mock jewelry array
