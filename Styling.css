@@ -69,9 +69,10 @@ body {
     justify-content: center;
 }
 #theCost {
-    border: none;
-    color: white; 
+    border: 1px solid #9A9A9A;
+    color: black; 
     padding: 15px;
+    font-size: 18px;
 }
 
 .buttonContainer {
@@ -89,8 +90,12 @@ body {
 }
 .searchContainer {
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 50px;
+    border: 1px solid red;
+    padding: 20px;
+    width: 30%;
 }
 #searchItem {
     background-color: white;
