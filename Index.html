@@ -6,6 +6,7 @@
     <link rel = "stylesheet" type="text/css" href = "./Styling.css">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>Marilyn's Creations - Inventory</title>
 </head>
 <body>
@@ -19,9 +20,15 @@
 <section class = "dropDown">
     <h1>Item</h1>
     <div class = "item item-1">
-        <input id="inputField-1" type="number" value="material" placeholder="material" oninput="calculate()">
-        <input id="inputField-2" type="number" value="fineness" placeholder="fineness">
-        <input id="inputField-3" type="number" value="size" placeholder="size">
+        <div class = "input-container">
+            <input id="inputField-1" type="number" value="material" placeholder="material" oninput="calculate()">
+        </div>
+        <div class = "input-container"> 
+            <input id="inputField-2" type="number" value="fineness" placeholder="fineness">
+        </div>
+        <div class = "input-container">
+            <input id="inputField-3" type="number" value="size" placeholder="size">
+        </div>
    </div>
     <div class = "item item-2">
         <h1>Quantity</h1>
