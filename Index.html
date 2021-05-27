@@ -24,25 +24,26 @@
             <input id="inputField-1" type="text" value="" placeholder="material">
         </div>
         <div class = "input-container"> 
-            <input id="inputField-2" type="text" value="" placeholder="fineness">
+            <input id="inputField-2" type="text" value="" placeholder="fineness (karats)">
         </div>
         <div class = "input-container">
-            <input id="inputField-3" type="text" value="" placeholder="size">
+            <input id="inputField-3" type="text" value="" placeholder="size (mm)">
         </div>
    </div>
+
+    <div class = "searchContainer">
+        <button id="searchItem" onclick="search()">Search</button>
+    </div>
+
    <div id="search_results"></div>
     <div class = "item item-2">
         <h1>Quantity</h1>
-        <input id="inputFieldSecond" type="number" value=1 placeholder = "I.e. 5 beads">
+        <input id="inputFieldSecond" type="number" value=1 placeholder = "I.e. 5 beads" onchange="recalculate()">
     </div>
     <div class = "cost">
-        <input id = "theCost" type="number"></input>
+        <input id = "theCost" type="number" readonly></input>
     </div>
 </section>
-
-<div class = "searchContainer">
-    <button id="searchItem" onclick="search()">Search</button>
-</div>
 
 <div class = "buttonContainer">
     <button id="addToCalc" onclick="addProduct()">Add to Calculation</button>
@@ -63,7 +64,7 @@
     <button id="totalCostCalc">Calculate</button>
 </section>
 <div class = "totalOutput-container">
-    <input id = "output" type="number"></input>
+    <input id ="output" type="number" readonly></input>
 </div>
 <script src = "./Inventory.js"></script>
 

@@ -12,15 +12,25 @@ let productCost = [];
 let totalCost = document.getElementById('output');
 let jewelryDisplay = document.getElementById('search_results');
 let reduction = 0;
+let price = 0;
+let table;
 
 //Calculates cost for x quantity of product y
 function calculate(event) {
-    theCost.innerHTML = event.target.value * quantity.value;
-    theCost.value = event.target.value * quantity.value;
+    price = event.target.value;
+    theCost.innerHTML = (price * quantity.value).toFixed(2);
+    theCost.value = (price * quantity.value).toFixed(2);
+}
+
+//Calculates cost for x quantity of product y
+function recalculate() {
+    theCost.innerHTML = (price * quantity.value).toFixed(2);
+    theCost.value = (price * quantity.value).toFixed(2);
 }
 
 //Appends the calculated cost to the list of materials that will be included in final cost calculation
 function addProduct() {
+    if(!theCost.value) { return; }
     
     productCost.push(theCost.valueAsNumber);
     var product = document.createElement('p');
@@ -32,70 +42,104 @@ function addProduct() {
     toCalcContainer.appendChild(product);
     deleteContainer.appendChild(deleteProduct);
 
-
     console.log(productCost);
     
-    inputField1.value = "material";
-    inputField2.value = "fineness";
-    inputField3.value = "size";
+    inputField1.value = '';
+    inputField2.value = '';
+    inputField3.value = '';
     quantity.value = 1;
-    theCost.value = 1;
-    
-    /*var product = document.createElement('p'); 
-    
-    product.innerText = theCost.value;
-    toCalcContainer.appendChild(product); */
+    theCost.value = '';
 
     deleteProduct.addEventListener('click', (event) => {
         toCalcContainer.removeChild(product)
         deleteContainer.removeChild(deleteProduct)
         reduction += Number(event.target.value);
 
-
-        console.log(reduction);
-        
+        console.log(reduction);  
     });
-    /*product.addEventListener('dblclick', () => {
-        toCalcContainer.removeChild(product)
-    }); */
 }
 
+//Calculates total cost
 totalCostCalc.addEventListener('click', () => {
     
     const yourFinalPrice = (accumulator, currentValue) => accumulator + currentValue;
-    totalCost.value = (productCost.reduce(yourFinalPrice)) - reduction;
+    let unrounded = productCost.reduce(yourFinalPrice) - reduction;
+    totalCost.value = unrounded.toFixed(2);
 })
-
-//Mock jewelry array
-jewelry = [
-    {'product': 'Gold', 'unitprice': 1.50, 'currency': 'CAD'},
-    {'product': '14k Gold', 'unitprice': 5.00, 'currency': 'CAD'},
-    {'product': '5mm Gold Balls', 'unitprice': 3.50, 'currency': 'CAD'},
-    {'product': 'Gold Earrings', 'unitprice': 20.99, 'currency': 'CAD'},
-    {'product': 'Silver', 'unitprice': 0.70, 'currency': 'CAD'},
-    {'product': '10mm Silver Chain', 'unitprice': 8.95, 'currency': 'CAD'}
-];
 
 //Will send query to server and receive jewelry array
 function search() {
 
+    //Set default values if input fields are left blank
+    let material = inputField1.value.trim() ? inputField1.value : 'material';
+    let fineness = inputField2.value.trim() ? inputField2.value : 'fineness';
+    let size = inputField3.value.trim() ? inputField3.value : 'size';
+    
+    console.log('material: ' + material);
+    console.log('fineness: ' + fineness);
+    console.log('size: ' + size);
+
+    theCost.value = '';
     jewelryDisplay.innerHTML = '';
-    displayResults();
+
+    //Make request to backend
+    let url = '';
+
+    if(!inputField1.value.trim() && !inputField2.value.trim() && !inputField3.value.trim()) {
+        url = 'http://localhost:3000/jewelry'
+    } else {
+        url = `http://localhost:3000/jewelry/${material}/${fineness}/${size}`;
+    }
+
+    fetch(url)
+    .then(response => response.json())
+    .then(displayResults)
+    .catch(function(error) {
+        console.log('Looks like there was a problem: \n', error);
+    });
 }
 
 //Will display queried jewelry 
-function displayResults() {
+function displayResults(data) {
 
-    jewelry.forEach((item) => {
-        let element = document.createElement('div');
-        let text = document.createTextNode(`${item.product}\t${item.unitprice}\t${item.currency}`);
-        element.appendChild(text);
-        jewelryDisplay.appendChild(element);
+    let jewelry = data;
+
+    createTable();
+
+    jewelry.forEach((item, index) => {
+        let item_row = table.insertRow(index + 1);
+        let item_name = item_row.insertCell(0);
+        let item_price = item_row.insertCell(1);
+        let item_currency = item_row.insertCell(2);
+        let item_select = item_row.insertCell(3);
+
+        item_name.innerHTML = `${item.product}`;
+        item_price.innerHTML = `${(item.unitprice).toFixed(2)}`;
+        item_currency.innerHTML = `${item.currency}`;
 
         let button = document.createElement('button');
         button.innerHTML = 'Select';
         button.value = item.unitprice;
         button.addEventListener('click', calculate);
-        jewelryDisplay.appendChild(button);
+        button.classList.add('select_button');
+
+        item_select.appendChild(button);
     });
+}
+
+//Create table that will contain the queried jewelry
+function createTable() {
+    table = document.createElement('table');
+    let headings = table.insertRow(0);
+    let product_heading = headings.insertCell(0);
+    let unitprice_heading = headings.insertCell(1);
+    let currency_heading = headings.insertCell(2);
+    let select_heading = headings.insertCell(3);
+
+    product_heading.innerHTML = '<b>Product</b>';
+    unitprice_heading.innerHTML = '<b>Unit Price</b>';
+    currency_heading.innerHTML = '<b>Currency</b>';
+    select_heading.innerHTML = '<b>Select</b>';
+
+    jewelryDisplay.appendChild(table);
 }
