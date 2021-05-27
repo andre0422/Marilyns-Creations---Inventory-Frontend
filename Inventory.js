@@ -86,9 +86,9 @@ function search() {
     let url = '';
 
     if(!inputField1.value.trim() && !inputField2.value.trim() && !inputField3.value.trim()) {
-        url = 'http://localhost:3000/jewelry'
+        url = 'http://192.168.2.21:3000/jewelry'
     } else {
-        url = `http://localhost:3000/jewelry/${material}/${fineness}/${size}`;
+        url = `http://192.168.2.21:3000/jewelry/${material}/${fineness}/${size}`;
     }
 
     fetch(url)
