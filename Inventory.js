@@ -1,5 +1,6 @@
 let addToCalc = document.getElementById('addToCalc');
 let toCalcContainer = document.getElementById('toCalcContainer');
+let defaultText = document.getElementById('defaultText');
 let deleteContainer = document.getElementById('deleteContainer')
 let inputField1 = document.getElementById('inputField-1');
 let inputField2 = document.getElementById('inputField-2');
@@ -14,7 +15,6 @@ let jewelryDisplay = document.getElementById('search_results');
 let reduction = 0;
 let price = 0;
 let table;
-
 //Calculates cost for x quantity of product y
 function calculate(event) {
     price = event.target.value;
@@ -44,6 +44,8 @@ function addProduct() {
 
     console.log(productCost);
     
+    defaultText.innerHTML = '';
+
     inputField1.value = '';
     inputField2.value = '';
     inputField3.value = '';
@@ -56,6 +58,7 @@ function addProduct() {
         reduction += Number(event.target.value);
 
         console.log(reduction);  
+            
     });
 }
 
