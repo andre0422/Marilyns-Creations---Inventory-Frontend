@@ -134,7 +134,7 @@ function displayResults(data) {
         item_select.classList.add('item_select');
         item_price.classList.add('item_price');
 
-        if (w < 376) {
+        if (w < 401) {
             item_currency.innerHTML = '';
             item_price.innerHTML = '$' + item.unitprice.toFixed(2) + ' ' + item.currency;
 
@@ -165,7 +165,7 @@ function createTable() {
     jewelryDisplay.appendChild(table);
 
     
-    if (w < 376) {
+    if (w < 401) {
         product_heading.innerHTML = '';
         unitprice_heading.innerHTML = '';
         currency_heading.innerHTML = '';
