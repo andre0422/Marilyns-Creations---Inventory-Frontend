@@ -89,9 +89,9 @@ function search() {
     let url = '';
 
     if(!inputField1.value.trim() && !inputField2.value.trim() && !inputField3.value.trim()) {
-        url = 'http://192.168.2.21:3000/jewelry'
+        url = 'https://mcjewelry.herokuapp.com/jewelry'||'http://192.168.2.21:3000/jewelry';
     } else {
-        url = `http://192.168.2.21:3000/jewelry/${material}/${fineness}/${size}`;
+        url =  `https://mcjewelry.herokuapp.com/jewelry/${material}/${fineness}/${size}` ||`http://192.168.2.21:3000/jewelry/${material}/${fineness}/${size}`;
     }
 
     fetch(url)
@@ -100,6 +100,7 @@ function search() {
     .catch(function(error) {
         console.log('Looks like there was a problem: \n', error);
     });
+ 
 }
 
 //Will display queried jewelry 
@@ -115,6 +116,7 @@ function displayResults(data) {
         let item_price = item_row.insertCell(1);
         let item_currency = item_row.insertCell(2);
         let item_select = item_row.insertCell(3);
+        let w = window.innerWidth;
 
         item_name.innerHTML = `${item.product}`;
         item_price.innerHTML = `${(item.unitprice).toFixed(2)}`;
@@ -127,6 +129,16 @@ function displayResults(data) {
         button.classList.add('select_button');
 
         item_select.appendChild(button);
+
+        item_name.classList.add('item_name');
+        item_select.classList.add('item_select');
+        item_price.classList.add('item_price');
+
+        if (w < 376) {
+            item_currency.innerHTML = '';
+            item_price.innerHTML = '$' + item.unitprice.toFixed(2) + ' ' + item.currency;
+
+        }
     });
 }
 
@@ -138,6 +150,12 @@ function createTable() {
     let unitprice_heading = headings.insertCell(1);
     let currency_heading = headings.insertCell(2);
     let select_heading = headings.insertCell(3);
+    let w = window.innerWidth;
+
+    product_heading.classList.add('headings')
+    unitprice_heading.classList.add('headings')
+    currency_heading.classList.add('headings')
+    select_heading.classList.add('headings') 
 
     product_heading.innerHTML = '<b>Product</b>';
     unitprice_heading.innerHTML = '<b>Unit Price</b>';
@@ -145,4 +163,13 @@ function createTable() {
     select_heading.innerHTML = '<b>Select</b>';
 
     jewelryDisplay.appendChild(table);
+
+    
+    if (w < 376) {
+        product_heading.innerHTML = '';
+        unitprice_heading.innerHTML = '';
+        currency_heading.innerHTML = '';
+        select_heading.innerHTML = '';
+    } 
+    console.log('window width = ' + w)
 }

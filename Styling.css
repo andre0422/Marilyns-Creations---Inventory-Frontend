@@ -204,7 +204,7 @@ body {
 
 table {
     width: 100%;
-    border: 1px #9A9A9A solid;
+    border: 1px #9A9A9A solid; 
     border-collapse: collapse;
 }
 
@@ -225,4 +225,32 @@ td {
     background-color: black;
     color: white;
     transition: ease-in-out 0.1s;
+}
+
+@media (max-width: 375px) {
+    table thead {
+          display: none;
+    } 
+    table td {
+        display: flex;
+    } 
+    .headings {
+        padding: 0;
+    }
+    .item_name {
+        font-weight: bolder;
+        text-align: center;
+    }
+    .item_price {
+        display: flex;
+        justify-content: center;
+        font-size: 1.5em;
+    }
+    .item_select {
+        border-bottom: 1px solid #9A9A9A;
+        display: flex;
+        justify-content: center;
+        margin-top: 0px;
+        padding-bottom: 30px;
+    }
 }
